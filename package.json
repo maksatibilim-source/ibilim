@@ -7,11 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:migrate": "prisma migrate dev",
-    "db:deploy": "prisma migrate deploy",
+    "db:push": "prisma db push",
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
-    "start:prod": "prisma migrate deploy && node prisma/seed.mjs && next start",
+    "start:prod": "prisma db push --skip-generate --accept-data-loss && node prisma/seed.mjs && next start",
     "postinstall": "prisma generate"
   },
   "prisma": {
