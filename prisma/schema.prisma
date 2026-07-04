@@ -1,0 +1,89 @@
+// ============================================================================
+//  Дерекқор схемасы (Prisma)
+//  Жергілікті: SQLite. Өнімге шығарарда provider-ді "postgresql" етіп,
+//  DATABASE_URL-ды ауыстырсаңыз жеткілікті — модельдер өзгермейді.
+//
+//  Рөл/түр/күй енумдары SQLite-та қолдаулмағандықтан String түрінде сақталады;
+//  олардың мүмкін мәндері lib/constants.ts файлында тізілген.
+// ============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model School {
+  id         String   @id @default(cuid())
+  name       String
+  /// Google Sheets жалпыға ашық сілтемесі (CSV экспорты үшін)
+  sheetUrl   String?
+  /// Импортталатын диапазон, мыс. "D2:P53" (D бағанынан, 2-жолдан)
+  sheetRange String?
+  /// Оқу жылының 1-аптасының дүйсенбісі, мыс. "2026-08-03"
+  sheetYearStart String?
+  createdAt  DateTime @default(now())
+
+  users User[]
+  tasks Task[]
+}
+
+model User {
+  id           String  @id @default(cuid())
+  name         String
+  username     String  @unique
+  passwordHash String
+  /// admin | director | vice_principal | teacher | staff
+  role         String
+  /// Лауазымы (мыс. "Оқу ісі жөніндегі орынбасар")
+  position     String  @default("")
+
+  school   School? @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  schoolId String?
+
+  sessions      Session[]
+  assignedTasks Task[]    @relation("AssignedTasks")
+
+  createdAt DateTime @default(now())
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model Task {
+  id       String @id @default(cuid())
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  schoolId String
+
+  title  String
+  /// major | minor
+  type   String @default("minor")
+  /// pending | in_progress | done
+  status String @default("pending")
+
+  /// Аптаның дүйсенбісі, мыс. "2026-06-29"
+  weekKey    String
+  /// unassigned | monday | tuesday | wednesday | thursday | friday | next_week
+  columnId   String @default("unassigned")
+  /// Баған ішіндегі реті
+  orderIndex Int    @default(0)
+
+  assignedTo   User?   @relation("AssignedTasks", fields: [assignedToId], references: [id], onDelete: SetNull)
+  assignedToId String?
+
+  /// Sheets-тегі бастапқы апта нөмірі (болса)
+  originWeek Int?
+
+  createdAt DateTime @default(now())
+
+  @@index([schoolId, weekKey])
+}
