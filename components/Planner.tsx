@@ -257,7 +257,7 @@ export default function Planner({ user, onLogout }: PlannerProps) {
               <button
                 type="button"
                 onClick={() => setDashOpen(true)}
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
               >
                 <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path d="M3 3h6v8H3V3zm8 0h6v4h-6V3zM3 13h6v4H3v-4zm8-4h6v8h-6V9z" />
@@ -268,7 +268,7 @@ export default function Planner({ user, onLogout }: PlannerProps) {
               <button
                 type="button"
                 onClick={() => setStaffOpen(true)}
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
               >
                 <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path d="M13 8a3 3 0 10-6 0 3 3 0 006 0zm-9 8c0-2.2 2.7-4 6-4s6 1.8 6 4v1H4v-1z" />
@@ -280,13 +280,13 @@ export default function Planner({ user, onLogout }: PlannerProps) {
         </AppHeader>
 
         {/* Апта таңдағыш */}
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 shadow-sm backdrop-blur dark:border-slate-700 dark:bg-slate-900/60">
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => goToWeek(-1)}
               aria-label="Алдыңғы апта"
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-500 transition hover:bg-slate-50 hover:text-slate-800"
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-500 transition hover:bg-slate-50 hover:text-slate-800 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-100"
             >
               <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true">
                 <path d="M12.5 4L7 10l5.5 6" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
@@ -297,7 +297,7 @@ export default function Planner({ user, onLogout }: PlannerProps) {
               <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
                 Таңдалған апта
               </p>
-              <p className="text-sm font-bold text-slate-800">
+              <p className="text-sm font-bold text-slate-800 dark:text-slate-100">
                 {formatDate(weekStart)} — {formatDate(addDays(weekStart, 4))}
               </p>
             </div>
@@ -306,7 +306,7 @@ export default function Planner({ user, onLogout }: PlannerProps) {
               type="button"
               onClick={() => goToWeek(1)}
               aria-label="Келесі апта"
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-500 transition hover:bg-slate-50 hover:text-slate-800"
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-500 transition hover:bg-slate-50 hover:text-slate-800 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-100"
             >
               <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true">
                 <path d="M7.5 4L13 10l-5.5 6" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
@@ -323,7 +323,7 @@ export default function Planner({ user, onLogout }: PlannerProps) {
             <button
               type="button"
               onClick={goToCurrentWeek}
-              className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
+              className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
             >
               Ағымдағы аптаға оралу
             </button>
@@ -331,13 +331,13 @@ export default function Planner({ user, onLogout }: PlannerProps) {
         </div>
 
         {error && (
-          <div className="mb-4 rounded-lg bg-rose-50 px-4 py-2 text-sm text-rose-700">
+          <div className="mb-4 rounded-lg bg-rose-50 px-4 py-2 text-sm text-rose-700 dark:bg-rose-950/40 dark:text-rose-300">
             {error}
           </div>
         )}
 
         {!isDirector && (
-          <div className="mb-4 rounded-xl border border-indigo-100 bg-indigo-50 px-4 py-3 text-sm text-indigo-800">
+          <div className="mb-4 rounded-xl border border-indigo-100 bg-indigo-50 px-4 py-3 text-sm text-indigo-800 dark:border-indigo-900/50 dark:bg-indigo-950/40 dark:text-indigo-200">
             <span className="font-semibold">{user.name}</span> ({user.position}) —
             сізге бекітілген тапсырмалар ғана көрсетілген.
           </div>

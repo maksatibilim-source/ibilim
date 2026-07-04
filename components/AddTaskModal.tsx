@@ -119,10 +119,10 @@ export default function AddTaskModal({
       {/* Форма терезесі */}
       <form
         onSubmit={handleSubmit}
-        className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl"
+        className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl dark:bg-slate-900"
       >
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-bold text-slate-900">Жаңа тапсырма қосу</h2>
+          <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">Жаңа тапсырма қосу</h2>
           <button
             type="button"
             onClick={onClose}
@@ -188,7 +188,7 @@ export default function AddTaskModal({
         {/* Кімге бекіту */}
         {isPrincipal ? (
           <label className="mb-5 block">
-            <span className="mb-1 block text-sm font-medium text-slate-700">
+            <span className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
               Кімге бекіту (міндетті емес)
             </span>
             <select

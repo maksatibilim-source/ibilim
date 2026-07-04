@@ -33,15 +33,15 @@ export default function KanbanColumn({
   onSetStatus,
 }: KanbanColumnProps) {
   return (
-    <div className="flex h-full min-w-0 flex-col rounded-2xl border border-slate-200 bg-slate-50/70">
+    <div className="flex h-full min-w-0 flex-col rounded-2xl border border-slate-200 bg-white/60 dark:border-slate-700/70 dark:bg-slate-900/40">
       {/* Баған тақырыбы */}
       <div className="flex items-center justify-between px-3 py-2">
         <div className="min-w-0">
-          <h3 className="truncate text-sm font-semibold text-slate-700">
+          <h3 className="truncate text-sm font-semibold text-slate-700 dark:text-slate-200">
             {column.title}
           </h3>
           {subtitle && (
-            <p className="mt-0.5 text-xs font-medium text-slate-400">
+            <p className="mt-0.5 text-xs font-medium text-slate-400 dark:text-slate-500">
               {subtitle}
             </p>
           )}
@@ -65,7 +65,9 @@ export default function KanbanColumn({
             className={[
               "thin-scrollbar flex flex-1 flex-col gap-2 overflow-y-auto rounded-b-2xl px-2 pb-3 pt-1 transition-colors",
               "min-h-[120px]",
-              snapshot.isDraggingOver ? "bg-indigo-50/80" : "bg-transparent",
+              snapshot.isDraggingOver
+                ? "bg-indigo-50/80 dark:bg-indigo-950/30"
+                : "bg-transparent",
             ].join(" ")}
           >
             {tasks.map((task, index) => (
@@ -83,7 +85,7 @@ export default function KanbanColumn({
             {provided.placeholder}
 
             {tasks.length === 0 && !snapshot.isDraggingOver && (
-              <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed border-slate-200 py-6 text-center text-xs text-slate-400">
+              <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed border-slate-200 py-6 text-center text-xs text-slate-400 dark:border-slate-700 dark:text-slate-500">
                 Тапсырманы осында сүйреңіз
               </div>
             )}

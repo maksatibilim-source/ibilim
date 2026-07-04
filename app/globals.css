@@ -12,13 +12,38 @@ body {
 }
 
 body {
-  @apply bg-slate-100 text-slate-800 antialiased;
+  @apply text-slate-800 antialiased dark:text-slate-200;
+  background: linear-gradient(160deg, #eef2ff 0%, #f1f5f9 45%, #ecfeff 100%);
+  min-height: 100%;
+}
+.dark body {
+  background: linear-gradient(160deg, #0b1120 0%, #0f172a 50%, #111827 100%);
+}
+
+/* Түнгі режимде барлық форма өрістері (input/select/textarea) */
+.dark input:not([type="file"]),
+.dark select,
+.dark textarea {
+  @apply border-slate-600 bg-slate-800 text-slate-100;
+}
+.dark input::placeholder,
+.dark textarea::placeholder {
+  @apply text-slate-500;
+}
+.dark select option {
+  @apply bg-slate-800 text-slate-100;
 }
 
 /* Жіңішке айналдыру жолағы (жоғарғы контейнер мен бағандар үшін) */
 .thin-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: rgb(203 213 225) transparent;
+}
+.dark .thin-scrollbar {
+  scrollbar-color: rgb(51 65 85) transparent;
+}
+.dark .thin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgb(51 65 85);
 }
 .thin-scrollbar::-webkit-scrollbar {
   height: 8px;

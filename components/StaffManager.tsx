@@ -91,9 +91,9 @@ export default function StaffManager({ open, onClose, onChanged }: StaffManagerP
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
       <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={onClose} />
 
-      <div className="relative z-10 flex max-h-[88vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
-        <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
-          <h2 className="text-lg font-bold text-slate-900">Қызметкерлерді басқару</h2>
+      <div className="relative z-10 flex max-h-[88vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-slate-900">
+        <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4 dark:border-slate-800">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">Қызметкерлерді басқару</h2>
           <button
             type="button"
             onClick={onClose}
@@ -109,7 +109,7 @@ export default function StaffManager({ open, onClose, onChanged }: StaffManagerP
         <div className="grid flex-1 gap-6 overflow-y-auto p-6 md:grid-cols-2">
           {/* Жаңа қызметкер */}
           <form onSubmit={createStaff} className="space-y-3">
-            <h3 className="text-sm font-semibold text-slate-700">Жаңа қызметкер қосу</h3>
+            <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-200">Жаңа қызметкер қосу</h3>
 
             <input
               value={name}
@@ -163,7 +163,7 @@ export default function StaffManager({ open, onClose, onChanged }: StaffManagerP
 
           {/* Бар қызметкерлер */}
           <div>
-            <h3 className="mb-3 text-sm font-semibold text-slate-700">
+            <h3 className="mb-3 text-sm font-semibold text-slate-700 dark:text-slate-200">
               Қызметкерлер ({users.length})
             </h3>
             {users.length === 0 ? (
@@ -171,10 +171,10 @@ export default function StaffManager({ open, onClose, onChanged }: StaffManagerP
             ) : (
               <ul className="space-y-2">
                 {users.map((u) => (
-                  <li key={u.id} className="rounded-xl border border-slate-200 p-3">
+                  <li key={u.id} className="rounded-xl border border-slate-200 p-3 dark:border-slate-700">
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
-                        <p className="truncate text-sm font-semibold text-slate-800">{u.name}</p>
+                        <p className="truncate text-sm font-semibold text-slate-800 dark:text-slate-100">{u.name}</p>
                         <p className="truncate text-xs text-slate-500">{u.position}</p>
                         <p className="mt-0.5 text-[11px] text-slate-400">@{u.username}</p>
                       </div>

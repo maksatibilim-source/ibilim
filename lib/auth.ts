@@ -22,6 +22,7 @@ export interface SafeUser {
   school: {
     id: string;
     name: string;
+    logo: string | null;
     sheetUrl: string | null;
     sheetRange: string | null;
     sheetYearStart: string | null;
@@ -88,6 +89,7 @@ export async function getCurrentUser(): Promise<SafeUser | null> {
       ? {
           id: u.school.id,
           name: u.school.name,
+          logo: u.school.logo,
           sheetUrl: u.school.sheetUrl,
           sheetRange: u.school.sheetRange,
           sheetYearStart: u.school.sheetYearStart,

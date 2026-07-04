@@ -82,6 +82,7 @@ export interface ApiTask {
 export interface SchoolInfo {
   id: string;
   name: string;
+  logo: string | null;
   sheetUrl: string | null;
   sheetRange: string | null;
   sheetYearStart: string | null;

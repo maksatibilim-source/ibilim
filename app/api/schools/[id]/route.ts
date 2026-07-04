@@ -19,6 +19,10 @@ export async function PATCH(req: Request, { params }: Ctx) {
   const body = await req.json().catch(() => null);
   const data: Record<string, string | null> = {};
 
+  // Логотип (base64 data URL) — тек admin. Бос жол болса — өшіру.
+  if (isAdmin && typeof body?.logo === "string") {
+    data.logo = body.logo.trim() || null;
+  }
   if (typeof body?.sheetUrl === "string") data.sheetUrl = body.sheetUrl.trim() || null;
   if (typeof body?.sheetRange === "string") data.sheetRange = body.sheetRange.trim() || null;
   // Оқу жылының басын әрдайым дүйсенбіге келтіріп сақтаймыз

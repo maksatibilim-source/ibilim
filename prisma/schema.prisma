@@ -19,6 +19,8 @@ datasource db {
 model School {
   id         String   @id @default(cuid())
   name       String
+  /// Мектеп логотипі (base64 data URL)
+  logo       String?
   /// Google Sheets жалпыға ашық сілтемесі (CSV экспорты үшін)
   sheetUrl   String?
   /// Импортталатын диапазон, мыс. "D2:P53" (D бағанынан, 2-жолдан)

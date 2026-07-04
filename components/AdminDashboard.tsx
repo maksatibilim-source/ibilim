@@ -61,8 +61,8 @@ export default function AdminDashboard({ user, onLogout }: AdminDashboardProps) 
       <AppHeader user={user} onLogout={onLogout} subtitle="Жүйе әкімшісінің панелі" />
 
       {/* Жаңа мектеп ашу */}
-      <section className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h2 className="mb-3 text-base font-bold text-slate-800">Жаңа мектеп ашу</h2>
+      <section className="mb-6 rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm backdrop-blur dark:border-slate-700 dark:bg-slate-900/60">
+        <h2 className="mb-3 text-base font-bold text-slate-800 dark:text-slate-100">Жаңа мектеп ашу</h2>
         <form onSubmit={createSchool} className="flex flex-wrap gap-3">
           <input
             value={newName}
@@ -80,7 +80,7 @@ export default function AdminDashboard({ user, onLogout }: AdminDashboardProps) 
       </section>
 
       {error && (
-        <div className="mb-4 rounded-lg bg-rose-50 px-4 py-2 text-sm text-rose-700">
+        <div className="mb-4 rounded-lg bg-rose-50 px-4 py-2 text-sm text-rose-700 dark:bg-rose-950/40 dark:text-rose-300">
           {error}
         </div>
       )}
@@ -183,6 +183,39 @@ function SchoolCard({
     }
   }
 
+  function onLogoChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // сол файлды қайта таңдауға мүмкіндік
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      onError("Тек сурет файлын таңдаңыз");
+      return;
+    }
+    if (file.size > 300 * 1024) {
+      onError("Логотип 300 КБ-тан аспасын (кішірек сурет таңдаңыз)");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = async () => {
+      try {
+        await api.patch(`/api/schools/${school.id}`, { logo: reader.result });
+        onChanged();
+      } catch (e) {
+        onError(e instanceof Error ? e.message : "Логотип жүктеу қатесі");
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+
+  async function removeLogo() {
+    try {
+      await api.patch(`/api/schools/${school.id}`, { logo: "" });
+      onChanged();
+    } catch (e) {
+      onError(e instanceof Error ? e.message : "Қате");
+    }
+  }
+
   async function importPlan() {
     setImporting(true);
     try {
@@ -220,18 +253,48 @@ function SchoolCard({
   }
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm backdrop-blur dark:border-slate-700 dark:bg-slate-900/60">
       <div className="mb-4 flex items-start justify-between gap-3">
-        <div>
-          <h3 className="text-lg font-bold text-slate-900">{school.name}</h3>
-          <p className="text-xs text-slate-400">
-            {school._count.users} қолданушы · {school._count.tasks} тапсырма
-          </p>
+        <div className="flex items-center gap-3">
+          {/* Логотип превьюі */}
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 dark:border-slate-700 dark:bg-slate-800">
+            {school.logo ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={school.logo} alt="Логотип" className="h-full w-full object-cover" />
+            ) : (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-slate-300" aria-hidden="true">
+                <path d="M12 3L2 8l10 5 8-4v6h2V8L12 3z" fill="currentColor" />
+              </svg>
+            )}
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+              {school.name}
+            </h3>
+            <p className="text-xs text-slate-400">
+              {school._count.users} қолданушы · {school._count.tasks} тапсырма
+            </p>
+            <div className="mt-1 flex items-center gap-2">
+              <label className="cursor-pointer text-xs font-semibold text-indigo-600 hover:underline dark:text-indigo-400">
+                Логотип жүктеу
+                <input type="file" accept="image/*" onChange={onLogoChange} className="hidden" />
+              </label>
+              {school.logo && (
+                <button
+                  type="button"
+                  onClick={removeLogo}
+                  className="text-xs font-semibold text-rose-500 hover:underline"
+                >
+                  Өшіру
+                </button>
+              )}
+            </div>
+          </div>
         </div>
         <button
           type="button"
           onClick={onDelete}
-          className="rounded-lg border border-rose-200 px-3 py-1.5 text-xs font-semibold text-rose-600 transition hover:bg-rose-50"
+          className="shrink-0 rounded-lg border border-rose-200 px-3 py-1.5 text-xs font-semibold text-rose-600 transition hover:bg-rose-50 dark:border-rose-900/50 dark:hover:bg-rose-950/30"
         >
           Мектепті жою
         </button>
@@ -239,8 +302,8 @@ function SchoolCard({
 
       <div className="grid gap-5 md:grid-cols-2">
         {/* Директор */}
-        <div className="rounded-xl bg-slate-50 p-4">
-          <h4 className="mb-2 text-sm font-semibold text-slate-700">Директор</h4>
+        <div className="rounded-xl bg-slate-50 p-4 dark:bg-slate-800/50">
+          <h4 className="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-200">Директор</h4>
           {director ? (
             editDir ? (
               <form onSubmit={saveDirector} className="space-y-2">
@@ -333,8 +396,8 @@ function SchoolCard({
         </div>
 
         {/* Google Sheets */}
-        <form onSubmit={saveSheet} className="rounded-xl bg-slate-50 p-4">
-          <h4 className="mb-2 text-sm font-semibold text-slate-700">
+        <form onSubmit={saveSheet} className="rounded-xl bg-slate-50 p-4 dark:bg-slate-800/50">
+          <h4 className="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
             Google Sheets (жылдық жоспар)
           </h4>
           <label className="mb-2 block">

@@ -34,7 +34,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
 
   return (
     <div className="flex min-h-screen items-center justify-center px-4 py-10">
-      <div className="w-full max-w-4xl overflow-hidden rounded-3xl bg-white shadow-xl md:grid md:grid-cols-2">
+      <div className="w-full max-w-4xl overflow-hidden rounded-3xl bg-white shadow-xl md:grid md:grid-cols-2 dark:bg-slate-900">
         {/* Сол жақ: брендинг */}
         <div className="hidden flex-col justify-between bg-gradient-to-br from-indigo-600 to-violet-700 p-8 text-white md:flex">
           <div>
@@ -58,12 +58,12 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
 
         {/* Оң жақ: кіру формасы */}
         <div className="p-8">
-          <h2 className="text-xl font-bold text-slate-900">Жүйеге кіру</h2>
-          <p className="mt-1 text-sm text-slate-500">Аккаунтыңызбен кіріңіз</p>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Жүйеге кіру</h2>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Аккаунтыңызбен кіріңіз</p>
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <label className="block">
-              <span className="mb-1 block text-sm font-medium text-slate-700">
+              <span className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
                 Пайдаланушы аты
               </span>
               <input
@@ -79,7 +79,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
             </label>
 
             <label className="block">
-              <span className="mb-1 block text-sm font-medium text-slate-700">
+              <span className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
                 Құпия сөз
               </span>
               <input

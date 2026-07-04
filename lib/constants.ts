@@ -42,7 +42,7 @@ export const ALL_COLUMN_IDS: ColumnId[] = ["unassigned", ...GRID_COLUMN_ORDER];
 
 /** Бағандардың қазақша атаулары */
 export const COLUMN_TITLES: Record<ColumnId, string> = {
-  unassigned: "Жылдық жоспардан келген тапсырмалар",
+  unassigned: "Тапсырмалар",
   monday: "Дүйсенбі",
   tuesday: "Сейсенбі",
   wednesday: "Сәрсенбі",

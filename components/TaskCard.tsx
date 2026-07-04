@@ -89,10 +89,10 @@ export default function TaskCard({
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           className={[
-            "group relative select-none rounded-xl border bg-white p-3 shadow-sm transition",
-            "border-slate-200",
+            "group relative select-none rounded-xl border p-3 shadow-sm transition",
+            "border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800",
             snapshot.isDragging
-              ? "shadow-lg ring-2 ring-indigo-300 rotate-[0.5deg]"
+              ? "shadow-lg ring-2 ring-indigo-300 rotate-[0.5deg] dark:ring-indigo-500"
               : "hover:shadow-md",
             dragDisabled ? "cursor-default" : "cursor-grab active:cursor-grabbing",
           ].join(" ")}
@@ -131,7 +131,7 @@ export default function TaskCard({
                 </button>
 
                 {menuOpen && (
-                  <div className="absolute right-0 top-8 z-30 w-60 overflow-hidden rounded-xl border border-slate-200 bg-white py-1 shadow-xl">
+                  <div className="absolute right-0 top-8 z-30 w-60 overflow-hidden rounded-xl border border-slate-200 bg-white py-1 shadow-xl dark:border-slate-700 dark:bg-slate-800">
                     <p className="px-3 py-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
                       Орынбасарға бекіту
                     </p>
@@ -146,8 +146,8 @@ export default function TaskCard({
                             setMenuOpen(false);
                           }}
                           className={[
-                            "flex w-full items-start gap-2 px-3 py-2 text-left text-sm transition hover:bg-indigo-50",
-                            active ? "bg-indigo-50" : "",
+                            "flex w-full items-start gap-2 px-3 py-2 text-left text-sm transition hover:bg-indigo-50 dark:hover:bg-indigo-950/40",
+                            active ? "bg-indigo-50 dark:bg-indigo-950/40" : "",
                           ].join(" ")}
                         >
                           <span
@@ -157,10 +157,10 @@ export default function TaskCard({
                             ].join(" ")}
                           />
                           <span>
-                            <span className="block font-medium text-slate-800">
+                            <span className="block font-medium text-slate-800 dark:text-slate-100">
                               {staff.name}
                             </span>
-                            <span className="block text-xs text-slate-500">
+                            <span className="block text-xs text-slate-500 dark:text-slate-400">
                               {staff.role}
                             </span>
                           </span>
@@ -190,7 +190,7 @@ export default function TaskCard({
           </div>
 
           {/* Тапсырма атауы */}
-          <p className="text-sm font-medium leading-snug text-slate-800">
+          <p className="text-sm font-medium leading-snug text-slate-800 dark:text-slate-100">
             {task.title}
           </p>
 

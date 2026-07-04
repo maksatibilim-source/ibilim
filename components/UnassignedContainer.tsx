@@ -22,7 +22,7 @@ export default function UnassignedContainer({
   onAssign,
 }: UnassignedContainerProps) {
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <section className="rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm backdrop-blur dark:border-slate-700 dark:bg-slate-900/50">
       <div className="mb-3 flex items-center gap-2">
         <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-100 text-indigo-600">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -30,12 +30,12 @@ export default function UnassignedContainer({
           </svg>
         </span>
         <div>
-          <h2 className="text-base font-bold text-slate-800">{column.title}</h2>
-          <p className="text-xs text-slate-500">
+          <h2 className="text-base font-bold text-slate-800 dark:text-slate-100">{column.title}</h2>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             Тапсырманы төмендегі апта күндеріне сүйреп апарыңыз
           </p>
         </div>
-        <span className="ml-auto inline-flex h-7 min-w-7 items-center justify-center rounded-full bg-slate-100 px-2 text-sm font-semibold text-slate-600">
+        <span className="ml-auto inline-flex h-7 min-w-7 items-center justify-center rounded-full bg-slate-100 px-2 text-sm font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-300">
           {tasks.length}
         </span>
       </div>
@@ -48,7 +48,9 @@ export default function UnassignedContainer({
             className={[
               "thin-scrollbar flex gap-3 overflow-x-auto rounded-xl p-2 transition-colors",
               "min-h-[130px]",
-              snapshot.isDraggingOver ? "bg-indigo-50" : "bg-slate-50",
+              snapshot.isDraggingOver
+                ? "bg-indigo-50 dark:bg-indigo-950/30"
+                : "bg-slate-50 dark:bg-slate-800/40",
             ].join(" ")}
           >
             {tasks.map((task, index) => (
