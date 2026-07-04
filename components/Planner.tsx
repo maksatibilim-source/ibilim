@@ -236,11 +236,7 @@ export default function Planner({ user, onLogout }: PlannerProps) {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="mx-auto min-h-screen max-w-[1600px] px-4 py-6 lg:px-8">
-        <AppHeader
-          user={user}
-          subtitle={user.school?.name}
-          onLogout={onLogout}
-        >
+        <AppHeader user={user} onLogout={onLogout}>
           <button
             type="button"
             onClick={() => setAddOpen(true)}

@@ -22,7 +22,7 @@ export default function UnassignedContainer({
   onAssign,
 }: UnassignedContainerProps) {
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm backdrop-blur dark:border-slate-700 dark:bg-slate-900/50">
+    <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
       <div className="mb-3 flex items-center gap-2">
         <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-100 text-indigo-600">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
